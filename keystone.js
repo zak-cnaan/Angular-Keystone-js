@@ -16,7 +16,6 @@ keystone.init({
 
 	'name': 'My Site',
 	'brand': 'My Site',
-	'mongo': 'mongodb://localhost/kstest6',
 
 	'less': 'public',
 	'static': 'public',

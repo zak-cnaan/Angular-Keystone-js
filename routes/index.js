@@ -36,7 +36,7 @@ var routes = {
 exports = module.exports = function(app) {
 	
 	// Views
-	app.get('/', routes.views.index);
+	//app.get('/', routes.views.index);
 	app.get('/blog/:category?', routes.views.blog);
 	app.get('/blog/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
@@ -55,5 +55,7 @@ exports = module.exports = function(app) {
 	app.delete('/api/posts/:id', keystone.initAPI, routes.api.posts.remove);
 ///////////////// posts ////////////////////
 
-
+app.get('/', function(req, res) {
+      res.sendfile(keystone.get('static') + '/index.html');
+    });
 };
