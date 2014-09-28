@@ -55,6 +55,14 @@ exports = module.exports = function(app) {
 	app.delete('/api/posts/:id', keystone.initAPI, routes.api.posts.remove);
 ///////////////// posts ////////////////////
 
+///////////////// things ////////////////////
+	app.get('/api/things', keystone.initAPI, routes.api.things.list);
+	app.get('/api/things/:id', keystone.initAPI, routes.api.things.get);
+	app.post('/api/things', keystone.initAPI, routes.api.things.create);
+	app.put('/api/things/:id', keystone.initAPI, routes.api.things.update);
+	app.delete('/api/things/:id', keystone.initAPI, routes.api.things.remove);
+///////////////// things ////////////////////
+
 app.get('/', function(req, res) {
       res.sendfile(keystone.get('static') + '/index.html');
     });
