@@ -63,6 +63,8 @@ exports = module.exports = function(app) {
 	app.delete('/api/things/:id', keystone.initAPI, routes.api.things.remove);
 ///////////////// things ////////////////////
 
+	require('./api/faq')(app);
+
 app.get('/', function(req, res) {
       res.sendfile(keystone.get('static') + '/index.html');
     });
