@@ -22,7 +22,9 @@
     "time-grunt": "~0.3.1",
     "grunt-concurrent": "~0.5.0",
     "grunt-nodemon": "~0.2.1",
-    "open": "0.0.5"
+    "open": "0.0.5",
+    "grunt-wiredep": "^1.9.0",
+    "grunt-injector": "^0.5.4"
   },
   "engines": {
     "node": ">=0.10.22",

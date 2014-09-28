@@ -15,6 +15,62 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		yeoman: {
+	      // configurable paths
+	      client: require('./bower.json').appPath || 'public',
+	      dist: 'dist'
+	    },
+	    injector: {
+      options: {
+
+      },
+      // Inject application script files into index.html (doesn't include bower)
+      scripts: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/public/', '');
+            filePath = filePath.replace('/.tmp/', '');
+            return '<script src="' + filePath + '"></script>';
+          },
+          starttag: '<!-- injector:js -->',
+          endtag: '<!-- endinjector -->'
+        },
+        files: {
+          '<%= yeoman.client %>/index.html': [
+              ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+              '{.tmp,<%= yeoman.client %>}/assets/**/*.js',
+               '!{.tmp,<%= yeoman.client %>}/app/app.js',
+               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
+            ]
+        }
+      },
+
+      // Inject component css into index.html
+      css: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/public/', '');
+            filePath = filePath.replace('/.tmp/', '');
+            return '<link rel="stylesheet" href="' + filePath + '">';
+          },
+          starttag: '<!-- injector:css -->',
+          endtag: '<!-- endinjector -->'
+        },
+        files: {
+          '<%= yeoman.client %>/index.html': [
+            '<%= yeoman.client %>/components/**/*.css',
+            '<%= yeoman.client %>/assets/**/*.css'
+          ]
+        }
+      }
+    },
+		wiredep: {
+		      target: {
+		        src: '<%= yeoman.client %>/index.html',
+		        ignorePath: '<%= yeoman.client %>/'
+		      }
+		    },		
 		express: {
 			options: {
 				port: config.port
@@ -108,6 +164,8 @@ module.exports = function(grunt) {
 	// default option to connect server
 	grunt.registerTask('serve', function(target) {
 		grunt.task.run([
+			'injector',
+			'wiredep',
 			'jshint',
 			'concurrent:dev'
 		]);
