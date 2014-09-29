@@ -30,4 +30,5 @@ node_modules
 # Ignore .DS_Store files on OS X
 .DS_Store
 
+# Ignore webstorm project files
 .idea/
