@@ -36,7 +36,7 @@ var routes = {
 exports = module.exports = function(app) {
 	
 	// Views
-	//app.get('/', routes.views.index);
+	app.get('/home', routes.views.index);
 	app.get('/blog/:category?', routes.views.blog);
 	app.get('/blog/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
@@ -46,13 +46,10 @@ exports = module.exports = function(app) {
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
 
-
-
-	require('./api/thing')(app);
 	require('./api/post')(app);
 	require('./api/faq')(app);
 
-app.get('/', function(req, res) {
+	app.get('/', function(req, res) {
       res.sendfile(keystone.get('static') + '/index.html');
     });
 };

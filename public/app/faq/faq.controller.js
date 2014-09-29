@@ -4,7 +4,7 @@ angular.module('ngFullApp')
     .controller('FaqCtrl', function ($scope, $http, $stateParams/*, $location, createFormData*/) {
         $scope.faqs = [];
         $scope.item = {};
-        $scope.item.files = {};
+        //$scope.item.files = {};
 
         var apiName = '/api/faqs/';
 

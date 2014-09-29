@@ -2,10 +2,17 @@
 
 angular.module('ngFullApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
+    $scope.menu = [
+    {
       'title': 'Home',
       'link': '/'
-    }];
+    },
+    {
+      'title': 'Faq',
+      'link': '#/faq'
+    }
+
+    ];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
