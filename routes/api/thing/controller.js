@@ -1,7 +1,7 @@
 var async = require('async'),
 	keystone = require('keystone');
 
-var Model = keystone.list('Faq').model;
+var Model = keystone.list('Thing').model;
 
 /**
  * List Posts

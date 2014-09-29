@@ -1,7 +1,7 @@
 
 var keystone = require('keystone'),
 	controller = require('./controller'),
-	apiName = 'faqs';
+	apiName = 'things';
 
 module.exports = function (app){
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:

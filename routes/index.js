@@ -47,22 +47,9 @@ exports = module.exports = function(app) {
 
 
 
-///////////////// posts ////////////////////
-	app.get('/api/posts', keystone.initAPI, routes.api.posts.list);
-	app.get('/api/posts/:id', keystone.initAPI, routes.api.posts.get);
-	app.post('/api/posts', keystone.initAPI, routes.api.posts.create);
-	app.put('/api/posts/:id', keystone.initAPI, routes.api.posts.update);
-	app.delete('/api/posts/:id', keystone.initAPI, routes.api.posts.remove);
-///////////////// posts ////////////////////
 
-///////////////// things ////////////////////
-	app.get('/api/things', keystone.initAPI, routes.api.things.list);
-	app.get('/api/things/:id', keystone.initAPI, routes.api.things.get);
-	app.post('/api/things', keystone.initAPI, routes.api.things.create);
-	app.put('/api/things/:id', keystone.initAPI, routes.api.things.update);
-	app.delete('/api/things/:id', keystone.initAPI, routes.api.things.remove);
-///////////////// things ////////////////////
-
+	require('./api/thing')(app);
+	require('./api/post')(app);
 	require('./api/faq')(app);
 
 app.get('/', function(req, res) {

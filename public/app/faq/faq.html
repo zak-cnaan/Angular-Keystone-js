@@ -1,0 +1,44 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+    <div class="container">
+        <h1>Faq</h1>
+    </div>
+</header>
+
+
+
+<div class="container" ng-init="getAll()">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Features:</h2>
+
+
+
+            <ul  class="list-group">
+                <li ng-repeat="item in faqs" class="list-group-item">
+
+                  <h4 tooltip="{{item.info}}">{{item.title}}</h4>
+                    <div ng-bind-html="item.content.brief"></div>
+                  
+
+                    <div class="media-btn">
+                        <a ng-href="#/faq/{{item._id}}" class="btn btn-primary btn-xs btn-success">View</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<footer class="footer">
+    footer
+</footer>
