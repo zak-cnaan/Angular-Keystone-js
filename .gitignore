@@ -31,4 +31,9 @@ node_modules
 .DS_Store
 
 # Ignore webstorm project files
-.idea/
+.idea
+
+.tmp
+node_modules
+public/bower_components
+public/uploads/
