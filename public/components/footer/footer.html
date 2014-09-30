@@ -1,0 +1,10 @@
+<footer class="footer" ng-controller="FooterCtrl">
+    <div class="container">
+      <ul class="list-inline">
+          <li>Powered by:</li>
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+            <a target="_blank" ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+      </ul>
+  </div>
+</footer>
