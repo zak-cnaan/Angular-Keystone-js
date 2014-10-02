@@ -9,10 +9,10 @@ angular.module('ngFullApp', [
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/errorpage');
 
     $locationProvider.html5Mode(false);
-    $httpProvider.interceptors.push('authInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
@@ -35,11 +35,15 @@ angular.module('ngFullApp', [
           return $q.reject(response);
         }
         else {
+            $rootScope.errorpage = response;
+          $location.path('/errorpage');
           return $q.reject(response);
         }
       }
     };
   })
+
+
 
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
