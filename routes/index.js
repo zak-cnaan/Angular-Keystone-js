@@ -18,35 +18,31 @@
  * http://expressjs.com/api.html#app.VERB
  */
 
+
 var _ = require('underscore'),
 	keystone = require('keystone'),
 	middleware = require('./middleware'),
 	importRoutes = keystone.importer(__dirname);
+var passport = require("passport");
+
+
+var pass = require('./pass');
+
+
 
 // Common Middleware
 //keystone.pre('routes', middleware.initErrorHandlers);
+
+keystone.pre("routes", passport.initialize());
+keystone.pre("routes", passport.session());
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
 
-// Handle errors
-/*keystone.set('404', function(req, res, next) {
-    res.notfound();
-});
-
-keystone.set('500', function(err, req, res, next) {
-    var title, message;
-    if (err instanceof Error) {
-        message = err.message;
-        err = err.stack;
-    }
-    res.err(err, title, message);
-});*/
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views'),
-	api: importRoutes('./api')
+	views: importRoutes('./views')
 };
 // Setup Route Bindings
 exports = module.exports = function(app) {
@@ -56,16 +52,24 @@ exports = module.exports = function(app) {
 	app.get('/blog/:category?', routes.views.blog);
 	app.get('/blog/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
-	
-	
+
+
+
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
 
 	require('./api/post')(app);
-	require('./api/faq')(app);
+    require('./api/faq')(app);
+    require('./api/user')(app);
+    require('./api/account')(app);
 
-	app.get('/', function(req, res) {
+
+
+
+
+    app.get('/', function(req, res) {
       res.sendfile(keystone.get('static') + '/index.html');
     });
 };

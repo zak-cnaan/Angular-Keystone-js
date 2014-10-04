@@ -6,7 +6,7 @@ angular.module('ngFullApp')
         $scope.item = {};
         //$scope.item.files = {};
 
-        var apiName = '/api/faqs/';
+        var apiName = '/api/faq/';
 
 
         $scope.getAll = function () {

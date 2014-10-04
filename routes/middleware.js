@@ -96,15 +96,3 @@ exports.requireUser = function(req, res, next) {
 	}
 	
 };
-
-exports.requireUserAjax = function(req, res, next) {
-
-    if (!req.user) {
-        //req.flash('error', 'Please sign in to access this page.');
-        //res.redirect('/keystone/signin');
-        res.send(401);
-    } else {
-        next();
-    }
-
-};
