@@ -20,7 +20,7 @@ angular.module('ngFullApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/auth/local', {
+        $http.post('/auth/login', {
           email: user.email,
           password: user.password
         }).
@@ -56,6 +56,7 @@ angular.module('ngFullApp')
        * @param  {Function} callback - optional
        * @return {Promise}
        */
+       /*
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
 
@@ -70,7 +71,7 @@ angular.module('ngFullApp')
             return cb(err);
           }.bind(this)).$promise;
       },
-
+*/
       /**
        * Change password
        *
@@ -79,6 +80,7 @@ angular.module('ngFullApp')
        * @param  {Function} callback    - optional
        * @return {Promise}
        */
+        /*
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
 
@@ -91,7 +93,7 @@ angular.module('ngFullApp')
           return cb(err);
         }).$promise;
       },
-
+*/
       /**
        * Gets all available info on authenticated user
        *
@@ -107,7 +109,7 @@ angular.module('ngFullApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
+        return currentUser.hasOwnProperty('isAdmin');
       },
 
       /**
@@ -120,7 +122,7 @@ angular.module('ngFullApp')
           }).catch(function() {
             cb(false);
           });
-        } else if(currentUser.hasOwnProperty('role')) {
+        } else if(currentUser.hasOwnProperty('isAdmin')) {
           cb(true);
         } else {
           cb(false);
@@ -133,7 +135,7 @@ angular.module('ngFullApp')
        * @return {Boolean}
        */
       isAdmin: function() {
-        return currentUser.role === 'admin';
+        return currentUser.isAdmin === true;
       },
 
       /**

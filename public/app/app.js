@@ -9,7 +9,7 @@ angular.module('ngFullApp', [
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/errorpage');
+      .otherwise('/');
 
     $locationProvider.html5Mode(false);
         $httpProvider.interceptors.push('authInterceptor');

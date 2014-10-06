@@ -29,7 +29,16 @@ exports.get = function(req, res) {
 		
 	});
 };
+exports.me = function(req, res) {
+    Model.findById(req.user._id).exec(function(err, item) {
 
+        if (err) return res.apiError('database error', err);
+        if (!item) return res.apiError('not found');
+
+        res.apiResponse(item);
+
+    });
+};
 
 /**
  * Create a Post
