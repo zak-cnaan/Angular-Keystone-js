@@ -45,8 +45,10 @@ angular.module('ngFullApp')
        * @param  {Function}
        */
       logout: function() {
-        $cookieStore.remove('token');
-        currentUser = {};
+          $http.get('/auth/logout').success(function() {
+              $cookieStore.remove('token');
+              currentUser = {};
+          });
       },
 
       /**
@@ -109,7 +111,7 @@ angular.module('ngFullApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('isAdmin');
+        return currentUser.hasOwnProperty('email');
       },
 
       /**
@@ -122,7 +124,7 @@ angular.module('ngFullApp')
           }).catch(function() {
             cb(false);
           });
-        } else if(currentUser.hasOwnProperty('isAdmin')) {
+        } else if(currentUser.hasOwnProperty('email')) {
           cb(true);
         } else {
           cb(false);
