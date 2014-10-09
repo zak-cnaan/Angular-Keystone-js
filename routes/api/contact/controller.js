@@ -1,17 +1,17 @@
 var nodemailer = require('nodemailer');
 var _ = require('underscore');
 var sanitizer = require('sanitizer');
+require('dotenv').load();
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'zak.cnaan@gmail.com',
-        pass: 'Qwerty78'
-    }
-});
+
+var transporter = nodemailer.createTransport(
+    JSON.parse(process.env.GMAIL_SERVICE)
+);
 
 exports.contact = function(req, res) {
-    console.log(req.body.message);
+
+
+
 
     var htmlMsg = "<tr><td colspan='2'><h2>You have mail!</h2></td></tr>";
     _.each(req.body, function(value, key) {
@@ -24,7 +24,7 @@ exports.contact = function(req, res) {
 
     transporter.sendMail({
         from: 'yoursite@gmail.com',
-        to: 'zak.cnaan@mail.com',
+        to: process.env.ADMIN_MAIL,
         subject: 'Contact message',
         html: htmlMsg
     },
