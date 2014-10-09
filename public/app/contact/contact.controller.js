@@ -32,7 +32,6 @@ angular.module('ngFullApp')
         };
 
         $scope.clearForm = function (){
-
             $scope.formData = {};
             $scope.submitted = false;
         };
