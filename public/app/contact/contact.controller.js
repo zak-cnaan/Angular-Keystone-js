@@ -4,39 +4,41 @@ angular.module('ngFullApp')
     .controller('ContactCtrl', function ($scope, $http) {
         $scope.formData = {};
 
-        $scope.formData.name = "zak";
-        $scope.formData.message = "hi, sdf sdf sdf sfds dfsdf sfdfsdf sdfsdf sdfs fsdfsdf sdfsdf sdfsdfsdf<scipt>alert(9);</scipt>";
-
         var apiName = '/api/contact/';
+
+        $scope.submitted = false;
+        $scope.masgSent = {sent: false, ok: false};
 
 
         $scope.sendForm = function (){
+            $scope.submitted = true;
 
-            console.log($scope.formData);
+            if ($scope.form.$valid) {
+
+                $http.post(apiName, $scope.formData)
+                    .success(function (data) {
+                        $scope.masgSent = {sent: true, ok: true};
+                        $scope.clearForm();
+                        console.log(data);
+                    })
+                    .error(function (data) {
+                        $scope.masgSent = {sent: true, ok: false};
+                        console.log(data);
+
+
+                    });
+
+            }
         };
 
         $scope.clearForm = function (){
 
             $scope.formData = {};
+            $scope.submitted = false;
         };
 
-        $http.post(apiName, $scope.formData)
-            .success(function (data) {
-                //$scope.formData = {data: data};
-                console.log(data);
-            })
-            .error(function (data){
-                console.log(data);
 
-            });
 
-       /* $http.post(apiName, $scope.item)
-            .success(function (data) {
-                $scope.formData = {data: data};
-            })
-            .error(function (){
-
-            });*/
 
 
     });
