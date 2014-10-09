@@ -7,10 +7,14 @@ angular.module('ngFullApp')
       'title': 'Home',
       'link': '/'
     },
-    {
-      'title': 'Faq',
-      'link': '#/faq'
-    }
+        {
+            'title': 'Faq',
+            'link': '#/faq'
+        },
+        {
+            'title': 'Contact',
+            'link': '#/contact'
+        }
 
     ];
 

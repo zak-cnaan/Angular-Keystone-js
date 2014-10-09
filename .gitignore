@@ -34,6 +34,5 @@ node_modules
 .idea
 
 .tmp
-node_modules
 public/bower_components
-public/uploads/
+public/uploads/*

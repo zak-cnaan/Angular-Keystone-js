@@ -64,6 +64,7 @@ exports = module.exports = function(app) {
     require('./api/faq')(app);
     require('./api/user')(app);
     require('./api/account')(app);
+    require('./api/contact')(app);
 
 
 
