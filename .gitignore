@@ -37,3 +37,5 @@ node_modules
 public/bower_components
 public/uploads
 
+#public/assets/styles/*.less
+

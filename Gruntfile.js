@@ -144,6 +144,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 files: ['public/**/**',
+                    '!public/assets/styles/*.less',
                     'public/styles/**/*.css',
                     'public/styles/**/*.less',
                     'templates/**/*.jade',
