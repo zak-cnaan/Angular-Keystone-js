@@ -88,6 +88,11 @@
       <script src="assets/js/site.js"></script>
       <!-- endinjector -->
 
-    <script src="//localhost:35729/livereload.js"></script>
+
+    <script>
+        if(location.host.indexOf("localhost") > -1){
+            document.write('\x3Cscript src="//localhost:35729/livereload.js">\x3C/script>');
+        }
+    </script>
      </body>
 </html>
