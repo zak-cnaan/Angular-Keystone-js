@@ -30,7 +30,13 @@ angular.module('ngFullApp')
     };
 
     $scope.isActive = function(route) {
-      return route === $location.path();
+      var idx = route.indexOf($location.path());
+        if (idx == -1 || $location.path() == '/')
+            return route == $location.path();
+
+        return true;
     };
+
+        console.log($location.path())
 
   });
