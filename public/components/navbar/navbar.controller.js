@@ -5,7 +5,7 @@ angular.module('ngFullApp')
     $scope.menu = [
     {
       'title': 'Home',
-      'link': '/'
+      'link': '#/'
     },
         {
             'title': 'Faq',
@@ -14,6 +14,10 @@ angular.module('ngFullApp')
         {
             'title': 'Contact',
             'link': '#/contact'
+        },
+        {
+            'title': 'Gallery',
+            'link': '#/gallery'
         }
 
     ];
@@ -30,11 +34,14 @@ angular.module('ngFullApp')
     };
 
     $scope.isActive = function(route) {
-      var idx = route.indexOf($location.path());
-        if (idx == -1 || $location.path() == '/')
-            return route == $location.path();
 
-        return true;
+        var idx = ("#" + $location.path()).indexOf(route);
+        if (idx > -1){
+            if (route == '#/')
+                return route == "#" + $location.path();
+            return true;
+        }
+        return false;
     };
 
 

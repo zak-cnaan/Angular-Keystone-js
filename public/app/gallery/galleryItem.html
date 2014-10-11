@@ -10,7 +10,9 @@
     <div class="row">
 
         <div class="col-md-3" ng-repeat="item in item.images" >
+            <a href="{{item.url}}" data-lightbox="image-1">
             <img class="img-responsive img-thumbnail" ng-src="{{item.url}}" />
+                </a>
         </div>
 
 
