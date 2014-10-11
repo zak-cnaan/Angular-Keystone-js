@@ -37,6 +37,5 @@ angular.module('ngFullApp')
         return true;
     };
 
-        console.log($location.path())
 
   });

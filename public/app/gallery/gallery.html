@@ -1,0 +1,23 @@
+
+<header class="hero-unit" id="banner">
+    <div class="container">
+        <h1>Gallerys</h1>
+    </div>
+</header>
+
+
+
+<div class="container" ng-init="getAll()">
+    <div class="row">
+        <div class="col-md-3" ng-repeat="item in gallerys" >
+            <h2><a ui-sref="galleryItem({id: item._id})">
+                {{item.name}}
+
+            <img class="img-responsive img-thumbnail" ng-src="{{'/uploads/' + item.photo.filename}}" ng-if="item.photo.filename" />
+                </a>
+            </h2>
+        </div>
+
+    </div>
+</div>
+

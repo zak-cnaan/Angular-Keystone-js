@@ -60,8 +60,12 @@ exports = module.exports = function(app) {
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
 
-	require('./api/post')(app);
+	// require('./api/post')(app);
+    // delete directory
+
     require('./api/faq')(app);
+    require('./api/gallery')(app);
+    // require('./api/blog')(app);
     require('./api/user')(app);
     require('./api/account')(app);
     require('./api/contact')(app);
