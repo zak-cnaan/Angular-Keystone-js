@@ -20,7 +20,9 @@ exports.list = function(req, res) {
  * Get Post by ID
  */
 exports.get = function(req, res) {
-	Model.findById(req.params.id).exec(function(err, item) {
+	Model.findById(req.params.id)
+        .populate('author categories')
+        .exec(function(err, item) {
 		
 		if (err) return res.apiError('database error', err);
 		if (!item) return res.apiError('not found');

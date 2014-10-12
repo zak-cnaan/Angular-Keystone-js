@@ -1,0 +1,33 @@
+
+<header class="hero-unit" id="banner">
+    <div class="container">
+        <h1>{{item.title}}</h1>
+    </div>
+</header>
+
+<div class="container" ng-init="findOne()">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <article>
+
+                <p><a ui-sref="blog">&larr; back to the blog</a></p>
+
+                <hr>
+                <header>
+                    <h2>{{item.title}}</h2>
+                    <h5><span ng-if="item.categories.length > 0">Posted in
+                        <span ng-repeat="cat in item.categories"><a>{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
+                        <span ng-if="item.author.name">by {{item.author.name.first}}</span>
+                    </h5>
+                </header>
+                <div class="post" ng-bind-html="item.content.extended"></div>
+
+
+
+</article>
+        </div>
+
+    </div>
+</div>
+

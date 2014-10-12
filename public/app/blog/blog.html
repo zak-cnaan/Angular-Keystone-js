@@ -1,0 +1,34 @@
+
+<header class="hero-unit" id="banner">
+    <div class="container">
+        <h1>Posts</h1>
+    </div>
+</header>
+
+
+
+<div class="container" ng-init="getAll()">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Features:</h2>
+
+
+
+            <ul  class="list-group">
+                <li ng-repeat="item in posts" class="list-group-item">
+
+                  <h4 tooltip="{{item.info}}">{{item.title}}</h4>
+                    <div ng-bind-html="item.content.brief"></div>
+                  
+
+                    <div class="media-btn">
+                        <a ng-href="#/blog/{{item._id}}" class="btn btn-primary btn-xs btn-success">View</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
