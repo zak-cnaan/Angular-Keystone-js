@@ -9,8 +9,14 @@ angular.module('ngFullApp')
                 controller: 'BlogCtrl',
                 parent: 'basic'
             })
+            .state('blogCategory', {
+                url: '^/blog/:cat',
+                templateUrl: 'app/blog/blog.html',
+                controller: 'BlogCtrl',
+                parent: 'basic'
+            })
             .state('blogItem', {
-                url: '^/blog/:id',
+                url: '^/blog/post/:id',
                 templateUrl: 'app/blog/blogItem.html',
                 controller: 'BlogCtrl',
                 parent: 'basic'

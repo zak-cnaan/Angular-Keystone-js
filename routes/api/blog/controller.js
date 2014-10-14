@@ -7,13 +7,47 @@ var Model = keystone.list('Post').model;
  * List Posts
  */
 exports.list = function(req, res) {
-	Model.find(function(err, items) {
+	Model
+        .where('state', 'published')
+        .sort('-publishedDate')
+        .populate('author categories')
+        .exec(function(err, items){
 		
 		if (err) return res.apiError('database error', err);
-		
-		res.apiResponse(items);
-		
+            var cat = [];
+
+            keystone.list('PostCategory').model.find().sort('name').exec(function(err, results) {
+
+                if (err) return res.apiError('database error', err);
+
+                console.log(results);
+                //console.log(items);
+                cat = results;
+
+                items.cat =  results ;
+                // res.apiResponse(items, results);
+
+                res.apiResponse(items);
+            });
+
+
+
 	});
+};
+
+exports.cat = function(req, res) {
+    Model
+        .where('categories').in([req.params.cat])
+        .where('state', 'published')
+        .sort('-publishedDate')
+        .populate('author categories')
+        .exec(function(err, items){
+
+            if (err) return res.apiError('database error', err);
+
+            res.apiResponse(items);
+
+        });
 };
 
 /**

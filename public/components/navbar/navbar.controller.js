@@ -18,6 +18,10 @@ angular.module('ngFullApp')
         {
             'title': 'Gallery',
             'link': '#/gallery'
+        },
+        {
+            'title': 'Blog',
+            'link': '#/blog'
         }
 
     ];

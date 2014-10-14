@@ -6,19 +6,31 @@ angular.module('ngFullApp')
         $scope.item = {};
         //$scope.item.files = {};
 
-        var apiName = '/api/post/';
+        var apiName = '/api/blog/';
 
 
         $scope.getAll = function () {
-            $http.get(apiName).success(function (data) {
-                $scope.posts = data;
-            });
+            if ($stateParams.cat){
+                $http.get(apiName + $stateParams.cat).success(function (data) {
+                    $scope.posts = data;
+                });
+            }
+            else {
+                $http.get(apiName).success(function (data) {
+                    $scope.posts = data;
+                });
+            }
         }
 
         $scope.findOne = function () {
-            $http.get(apiName + $stateParams.id).success(function (data) {
+            $http.get(apiName + "post/" + $stateParams.id).success(function (data) {
                 $scope.item = data;
             });
+        };
+
+        $scope.countPosts = function (){
+            return "123 posts";
+
         };
 
 

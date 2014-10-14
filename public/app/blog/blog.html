@@ -1,7 +1,7 @@
 
 <header class="hero-unit" id="banner">
     <div class="container">
-        <h1>Posts</h1>
+        <h1>Blog</h1>
     </div>
 </header>
 
@@ -9,26 +9,37 @@
 
 <div class="container" ng-init="getAll()">
     <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header">Features:</h2>
+        <div class="col-sm-8 col-md-9">
+            <h4 class="text-weight-normal">Showing {{countPosts()}}.</h4>
+            <div class="blog">
+                <div class="post" ng-repeat="item in posts">
+                    <h2><a ui-sref="blogItem({id: item._id})">{{item.title}}</a></h2>
+                    <p class="lead text-muted">
+                        <span ng-if="item.categories.length > 0">Posted in
+                        <span ng-repeat="cat in item.categories"><a>{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
+                        <span ng-if="item.author.name">by {{item.author.name.first}}</span>
+                    </p>
+                    <p ng-bind-html="item.content.brief"></p>
+                    <p class="read-more"><a ui-sref="blogItem({id: item._id})">Read more...</a></p>
 
 
 
-            <ul  class="list-group">
-                <li ng-repeat="item in posts" class="list-group-item">
 
-                  <h4 tooltip="{{item.info}}">{{item.title}}</h4>
-                    <div ng-bind-html="item.content.brief"></div>
-                  
+                </div>
+            </div>
+        </div>
 
-                    <div class="media-btn">
-                        <a ng-href="#/blog/{{item._id}}" class="btn btn-primary btn-xs btn-success">View</a>
-                    </div>
-                </li>
-            </ul>
+        <div class="col-sm-4 col-md-3">
+            <h2>Categories</h2>
+            <div class="list-group">
+                <a href="/blog" class="active list-group-item">All Categories</a>
+                <a href="#" class="false list-group-item">cat</a>
+
+            </div>
 
         </div>
 
+
     </div>
-</div>
+   </div>
 
