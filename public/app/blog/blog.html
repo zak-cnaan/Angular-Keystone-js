@@ -10,13 +10,13 @@
 <div class="container" ng-init="getAll()">
     <div class="row">
         <div class="col-sm-8 col-md-9">
-            <h4 class="text-weight-normal">Showing {{countPosts()}}.</h4>
+            <h4 class="text-weight-normal" ng-show="ready">Showing {{countPosts()}}.</h4>
             <div class="blog">
                 <div class="post" ng-repeat="item in posts">
                     <h2><a ui-sref="blogItem({id: item._id})">{{item.title}}</a></h2>
                     <p class="lead text-muted">
                         <span ng-if="item.categories.length > 0">Posted in
-                        <span ng-repeat="cat in item.categories"><a>{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
+                        <span ng-repeat="cat in item.categories"><a ui-sref="blogCategory({cat: cat._id})">{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
                         <span ng-if="item.author.name">by {{item.author.name.first}}</span>
                     </p>
                     <p ng-bind-html="item.content.brief"></p>
@@ -32,8 +32,11 @@
         <div class="col-sm-4 col-md-3">
             <h2>Categories</h2>
             <div class="list-group">
-                <a href="/blog" class="active list-group-item">All Categories</a>
-                <a href="#" class="false list-group-item">cat</a>
+                <a ui-sref="blog" class="list-group-item" ng-class="{active: isCatActive('all'), false: !isCatActive('all')}">All Categories</a>
+                <a ui-sref="blogCategory({cat: cat._id})" class="false list-group-item"
+                   ng-class="{active: isCatActive(cat._id), false: !isCatActive('all')}"
+                   ng-repeat="cat in cats">{{cat.name}}<span class="badge">{{cat.postcount}}</span></a>
+
 
             </div>
 

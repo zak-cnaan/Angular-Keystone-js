@@ -17,7 +17,7 @@
                 <header>
                     <h2>{{item.title}}</h2>
                     <h5><span ng-if="item.categories.length > 0">Posted in
-                        <span ng-repeat="cat in item.categories"><a>{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
+                        <span ng-repeat="cat in item.categories"><a ui-sref="blogCategory({cat: cat._id})">{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
                         <span ng-if="item.author.name">by {{item.author.name.first}}</span>
                     </h5>
                 </header>

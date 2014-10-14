@@ -21,11 +21,37 @@ exports.list = function(req, res) {
 	});
 };
 exports.catlist = function(req, res) {
+    var data = [];
     keystone.list('PostCategory').model.find().sort('name').exec(function (err, results) {
 
         if (err) return res.apiError('database error', err);
-        res.apiResponse(results);
+        //res.apiResponse(results);
+        data = results;
+
+
+        // Load the counts for each category
+        async.map(data, addCatCount, function (e, r) {
+            res.apiResponse(r);
+        });
+
+        function addCatCount(category, callback) {
+            keystone.list('Post').model.count()
+                .where('categories').in([category._id])
+                .exec(function (err, count) {
+                    if (err) return res.apiError('database error', err);
+
+                    var obj = JSON.parse( JSON.stringify( category ) );
+                    obj.postcount = count;
+
+                    callback(null, obj);
+                });
+        }
+
+
+
     });
+
+
 };
 
 exports.cat = function(req, res) {
