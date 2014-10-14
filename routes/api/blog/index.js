@@ -9,5 +9,6 @@ module.exports = function (app){
 	
 	app.get('/api/' + apiName, keystone.initAPI, controller.list);
 	app.get('/api/' + apiName + '/post/:id', keystone.initAPI, controller.get);
-	app.get('/api/' + apiName + '/:cat', keystone.initAPI, controller.cat);
+    app.get('/api/' + apiName + '/:cat', keystone.initAPI, controller.cat);
+    app.get('/api/' + apiName + 'cat', keystone.initAPI, controller.catlist);
 };

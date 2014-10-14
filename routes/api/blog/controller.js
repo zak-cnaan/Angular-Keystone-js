@@ -14,25 +14,18 @@ exports.list = function(req, res) {
         .exec(function(err, items){
 		
 		if (err) return res.apiError('database error', err);
-            var cat = [];
 
-            keystone.list('PostCategory').model.find().sort('name').exec(function(err, results) {
-
-                if (err) return res.apiError('database error', err);
-
-                console.log(results);
-                //console.log(items);
-                cat = results;
-
-                items.cat =  results ;
-                // res.apiResponse(items, results);
-
-                res.apiResponse(items);
-            });
-
+            res.apiResponse(items);
 
 
 	});
+};
+exports.catlist = function(req, res) {
+    keystone.list('PostCategory').model.find().sort('name').exec(function (err, results) {
+
+        if (err) return res.apiError('database error', err);
+        res.apiResponse(results);
+    });
 };
 
 exports.cat = function(req, res) {
