@@ -8,6 +8,8 @@
 
 
 <div class="container" ng-init="getAll()">
+    <div ng-include="'components/bc/bc.html'"></div>
+
     <div class="row">
         <div class="col-sm-8 col-md-9">
             <h4 class="text-weight-normal" ng-show="ready">Showing {{countPosts()}}.</h4>

@@ -1,0 +1,15 @@
+
+<ul class="breadcrumb" ng-controller="BcCtrl">
+    <li>
+        <a ui-sref="home">Home</a>
+    </li>
+    <li ng-repeat="state in states">
+        <a ui-sref='{{state}}'>{{state}}</a>
+    </li>
+    <li ng-if="item.title">
+        <a href="{{'#'+path}}">{{item.title}}</a>
+    </li>
+    <li ng-if="item.name">
+        <a href="{{'#'+path}}">{{item.name}}</a>
+    </li>
+</ul>

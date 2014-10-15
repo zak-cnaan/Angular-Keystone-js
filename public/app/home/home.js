@@ -6,6 +6,9 @@ angular.module('ngFullApp')
       .state('home', {
         url: '/',
         templateUrl: 'app/home/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+            data: {
+                title: 'home page'
+            }
       });
   });

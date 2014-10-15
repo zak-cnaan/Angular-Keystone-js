@@ -19,7 +19,8 @@ angular.module('ngFullApp')
                 url: '^/blog/post/:id',
                 templateUrl: 'app/blog/blogItem.html',
                 controller: 'BlogCtrl',
-                parent: 'basic'
+                parent: 'basic',
+                data: ["blog", ":id"]
 
             })
     });

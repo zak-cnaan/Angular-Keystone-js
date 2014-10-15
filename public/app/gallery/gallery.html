@@ -8,6 +8,8 @@
 
 
 <div class="container" ng-init="getAll()">
+    <div ng-include="'components/bc/bc.html'"></div>
+
     <div class="row">
         <div class="col-md-3" ng-repeat="item in gallerys" >
             <h2><a ui-sref="galleryItem({id: item._id})">
