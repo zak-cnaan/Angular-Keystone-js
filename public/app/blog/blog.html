@@ -21,7 +21,7 @@
                         <span ng-repeat="cat in item.categories"><a ui-sref="blogCategory({cat: cat._id})">{{cat.name}}</a>{{$last ? '' : ', '}}</span></span>
                         <span ng-if="item.author.name">by {{item.author.name.first}}</span>
                     </p>
-                    <p ng-bind-html="item.content.brief"></p>
+                    <div class="ellipsis abs" ng-bind-html="item.content.brief"></div>
                     <p class="read-more"><a ui-sref="blogItem({id: item._id})">Read more...</a></p>
 
 
