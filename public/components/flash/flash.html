@@ -1,0 +1,9 @@
+<div flash-alert active-class="alert-flash in" class="flash-alert" duration="0">
+    <button type="button" class="close" ng-click="hide()">&times;</button>
+    <i class="fa-check fa" ng-show="flash.type == 'success'"></i>
+    <i class="fa-exclamation-triangle fa" ng-show="flash.type == 'error'"></i>
+    <i class="fa-info fa" ng-show="flash.type == 'info'"></i>
+    <i class="fa-exclamation fa" ng-show="flash.type == 'warn'"></i>
+    <strong class="alert-heading" ng-if="false">{{flash.type}}</strong>
+    <span class="alert-message">{{flash.message}}</span>
+</div>

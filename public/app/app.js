@@ -1,61 +1,74 @@
 'use strict';
 
 angular.module('ngFullApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ui.router',
-    'ui.bootstrap'
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ui.router',
+    'ui.bootstrap',
+    'angular-flash.service',
+    'angular-flash.flash-alert-directive'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+        $urlRouterProvider
+            .otherwise('/');
 
-    $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(false);
         $httpProvider.interceptors.push('authInterceptor');
-  })
 
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
-    return {
-      // Add authorization token to headers
-      request: function (config) {
-        config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
-        }
-        return config;
-      },
+    })
+    .config(function (flashProvider) {
+// Support bootstrap 3.0 "alert-danger" class with error flash types
+        flashProvider.errorClassnames.push('alert-danger');
+        /**
+         * Also have...
+         *
+         * flashProvider.warnClassnames
+         * flashProvider.infoClassnames
+         * flashProvider.successClassnames
+         */
+    })
 
-      // Intercept 401s and redirect you to login
-      responseError: function(response) {
-        if(response.status === 401) {
-          $location.path('/login');
-          // remove any stale tokens
-          $cookieStore.remove('token');
-          return $q.reject(response);
-        }
-        else {
-            $rootScope.errorpage = response;
-          $location.path('/errorpage');
-          return $q.reject(response);
-        }
-      }
-    };
-  })
+    .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
+        return {
+            // Add authorization token to headers
+            request: function (config) {
+                config.headers = config.headers || {};
+                if ($cookieStore.get('token')) {
+                    config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+                }
+                return config;
+            },
+
+            // Intercept 401s and redirect you to login
+            responseError: function (response) {
+                if (response.status === 401) {
+                    $location.path('/login');
+                    // remove any stale tokens
+                    $cookieStore.remove('token');
+                    return $q.reject(response);
+                }
+                else {
+                    $rootScope.errorpage = response;
+                    $location.path('/errorpage');
+                    return $q.reject(response);
+                }
+            }
+        };
+    })
 
 
+    .run(function ($rootScope, $location, Auth) {
+        // Redirect to login if route requires auth and you're not logged in
+        $rootScope.$on('$stateChangeStart', function (event, next) {
+            Auth.isLoggedInAsync(function (loggedIn) {
 
-  .run(function ($rootScope, $location, Auth) {
-    // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
-
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-
+                if (next.authenticate && !loggedIn) {
+                    $location.path('/login');
 
 
-        }
-      });
+                }
+            });
+        });
     });
-  });
+

@@ -3,16 +3,17 @@
 <div class="container">
     <div ng-include="'components/bc/bc.html'"></div>
 
+
+
     <div class="row">
         <div class="col-sm-12">
             <h1>Contact us</h1>
         </div>
         <div class="col-sm-12">
-            <div class="form-group">
-                <div class="bg-danger well-sm" ng-show="masgSent.sent && !masgSent.ok">Something went wrong!</div>
-                <div class="bg-success well-sm" ng-show="masgSent.sent && masgSent.ok">Message sent OK!</div>
 
-                </div>
+            <div ng-include="'components/flash/flash.html'"></div>
+
+
 
         </div>
         <div class="col-sm-12">
