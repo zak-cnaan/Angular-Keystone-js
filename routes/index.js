@@ -27,6 +27,7 @@ var passport = require("passport");
 
 
 var pass = require('./pass');
+var qt = require('./imageresizer').qt;
 
 
 
@@ -64,6 +65,7 @@ exports = module.exports = function(app) {
     // delete directory
 
     require('./api/faq')(app);
+    require('./api/thumb')(app);
     require('./api/gallery')(app);
     require('./api/blog')(app);
     require('./api/user')(app);
@@ -71,7 +73,7 @@ exports = module.exports = function(app) {
     require('./api/contact')(app);
 
 
-
+    app.use('/systemfiles', qt.static('systemfiles'));
 
 
     app.get('/', function(req, res) {

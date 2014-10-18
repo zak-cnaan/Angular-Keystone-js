@@ -1,0 +1,63 @@
+<div class="container" ng-init="getAll()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div ng-include="'components/bc/bc.html'"></div>
+            <h1>Image resizer example</h1>
+            <ul  class="list-group">
+                <li ng-repeat="item in thumbs" class="list-group-item">
+                  <h4>{{item.title}}</h4>
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?width=200" alt="{{item.title}}" />
+                    <div>?width=200</div>
+                    <div>fixed_width_no_crop</div>
+                    <hr>
+
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?height=200" alt="{{item.title}}" />
+                    <div>?height=200</div>
+                    <div>fixed_height_no_crop</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?width=200&height=200" alt="{{item.title}}" />
+                    <div>?width=200 &height=200</div>
+                    <div>fixed_width_and_fixed_height</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?width=200&cropheight=100" alt="{{item.title}}" />
+                    <div>?width=200 &cropheight=100</div>
+                    <div>fixed_width_crop_height</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?height=200&cropwidth=100" alt="{{item.title}}" />
+                    <div>?height=200 &cropwidth=100</div>
+                    <div>fixed_height_crop_width</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?maxwidth=250" alt="{{item.title}}" />
+                    <div>?maxwidth=250</div>
+                    <div>max_width_no_crop</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?maxheight=250" alt="{{item.title}}" />
+                    <div>?maxheight=250</div>
+                    <div>max_height_no_crop</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?maxwidth=250&cropheight=80" alt="{{item.title}}" />
+                    <div>?maxwidth=250 &cropheight=80</div>
+                    <div>max_width_crop_height</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?maxheight=250&cropwidth=80" alt="{{item.title}}" />
+                    <div>?maxheight=250 &cropwidth=80</div>
+                    <div>max_height_crop_width</div>
+                    <hr>
+
+                    <img ng-src="/{{item.image.path}}/{{item.image.filename}}?maxwidth=150&maxheight=100" alt="{{item.title}}" />
+                    <div>maxwidth=150 &maxheight=100</div>
+                    <div>max_width_and_max_height</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -22,6 +22,10 @@ angular.module('ngFullApp')
         {
             'title': 'Blog',
             'link': '#/blog'
+        },
+        {
+            'title': 'Thumb',
+            'link': '#/thumb'
         }
 
     ];

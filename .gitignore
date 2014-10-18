@@ -36,6 +36,7 @@ node_modules
 .tmp
 public/bower_components
 public/uploads
+systemfiles
 
 #public/assets/styles/*.less
 
