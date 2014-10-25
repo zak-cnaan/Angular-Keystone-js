@@ -1,10 +1,20 @@
 'use strict';
 
 angular.module('ngFullApp')
-    .controller('FaqCtrl', function ($scope, $http, $stateParams/*, $location, createFormData*/) {
+    .controller('FaqCtrl', function ($scope, $http, $stateParams, i18n/*, $location, createFormData*/) {
         $scope.faqs = [];
         $scope.item = {};
-        //$scope.item.files = {};
+
+        $scope.i18n = i18n;
+        // Try to instantly translate a phrase. This can fail, because the locale might not have been loaded yet.
+        console.log( "Instant: " + i18n.__( "My translation phrase" ) );
+        i18n.ensureLocaleIsLoaded().then( function() {
+            // Chaining on the promise returned from ensureLocaleIsLoaded() will make sure the translation is loaded.
+            console.log( "Insured: " + i18n.__( "My translation phrase" ) );
+        } );
+
+        console.log(i18n);
+
 
         var apiName = '/api/faq/';
 

@@ -29,6 +29,9 @@ var passport = require("passport");
 var pass = require('./pass');
 var qt = require('./imageresizer').qt;
 
+var i18n = require( "i18n" );
+var i18nRoutes = require( "i18n-node-angular" );
+
 
 
 // Common Middleware
@@ -41,12 +44,18 @@ keystone.pre('render', middleware.flashMessages);
 
 
 
+
+
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views')
 };
 // Setup Route Bindings
 exports = module.exports = function(app) {
+
+    app.use( i18n.init );
+    app.use( i18nRoutes.getLocale );
+    i18nRoutes.configure( app );
 	
 	// Views
 	app.get('/home', routes.views.index);
