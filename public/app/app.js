@@ -7,8 +7,7 @@ angular.module('ngFullApp', [
     'ui.router',
     'ui.bootstrap',
     'angular-flash.service',
-    'angular-flash.flash-alert-directive',
-    'i18n'
+    'angular-flash.flash-alert-directive'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider
@@ -29,8 +28,6 @@ angular.module('ngFullApp', [
          * flashProvider.successClassnames
          */
     })
-
-
 
     .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
         return {
