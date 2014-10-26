@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('ngFullApp')
-    .controller('FaqCtrl', function ($scope, $http, $stateParams/*, $location, createFormData*/) {
+    .controller('FaqCtrl', function ($scope, $http, $stateParams/*, $translate, $location, createFormData*/) {
         $scope.faqs = [];
         $scope.item = {};
         //$scope.item.files = {};
+
+       /* $scope.setLang = function(langKey) {
+            $translate.use(langKey);
+        };*/
 
         var apiName = '/api/faq/';
 

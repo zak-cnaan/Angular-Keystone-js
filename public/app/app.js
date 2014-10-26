@@ -7,7 +7,8 @@ angular.module('ngFullApp', [
     'ui.router',
     'ui.bootstrap',
     'angular-flash.service',
-    'angular-flash.flash-alert-directive'
+    'angular-flash.flash-alert-directive',
+    'pascalprecht.translate'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider
@@ -17,6 +18,23 @@ angular.module('ngFullApp', [
         $httpProvider.interceptors.push('authInterceptor');
 
     })
+
+    .config(['$translateProvider', function($translateProvider){
+// Register a loader for the static files
+// So, the module will search missing translation tables under the specified urls.
+// Those urls are [prefix][langKey][suffix].
+        /*$translateProvider.useStaticFilesLoader({
+            prefix: 'i10n/',
+            suffix: '.json'
+        });*/
+
+        $translateProvider.useUrlLoader('components/i10n/en.json');
+
+
+// Tell the module what language to use by default
+        $translateProvider.preferredLanguage('en');
+    }])
+
     .config(function (flashProvider) {
 // Support bootstrap 3.0 "alert-danger" class with error flash types
         flashProvider.errorClassnames.push('alert-danger');
