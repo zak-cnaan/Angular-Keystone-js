@@ -8,7 +8,8 @@ angular.module('ngFullApp', [
     'ui.bootstrap',
     'angular-flash.service',
     'angular-flash.flash-alert-directive',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'angularUtils.directives.dirPagination'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $urlRouterProvider
