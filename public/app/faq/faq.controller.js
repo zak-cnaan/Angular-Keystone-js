@@ -1,9 +1,37 @@
 'use strict';
 
 angular.module('ngFullApp')
-    .controller('FaqCtrl', function ($scope, $http, $stateParams/*, $translate, $location, createFormData*/) {
+    .controller('FaqCtrl', function ($scope, $http, $stateParams, PageTitle, modalService/*, Modal, $modal, $rootScope, $translate, $location, createFormData*/) {
         $scope.faqs = [];
         $scope.item = {};
+
+
+        /*Modal.confirm.delete(function (){console.log(9);})
+            ('modal-primary', {title: "new title", html:"new html"});*/
+
+        $scope.modalDemo = function (size) {
+
+            var modalDefaults = {
+                size: size || '',
+                windowClass: 'modal-danger'
+            };
+
+
+            var modalOptions = {
+                actionButtonText: 'Yes',
+                headerText: 'Really ?',
+                bodyText: 'Are you sure ?',
+                modalButtonType: 'danger'
+            };
+
+            modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+                console.log('yes');
+            });
+        };
+
+
+
+
         //$scope.item.files = {};
 
        /* $scope.setLang = function(langKey) {
@@ -14,6 +42,7 @@ angular.module('ngFullApp')
 
 
         $scope.getAll = function () {
+            PageTitle.setTitle('Faq');
             $http.get(apiName).success(function (data) {
                 $scope.faqs = data;
             });
@@ -22,6 +51,7 @@ angular.module('ngFullApp')
         $scope.findOne = function () {
             $http.get(apiName + $stateParams.id).success(function (data) {
                 $scope.item = data;
+                PageTitle.setTitle($scope.item.title);
             });
         };
 

@@ -1,77 +1,54 @@
-'use strict';
-
 angular.module('ngFullApp')
-  .factory('Modal', function ($rootScope, $modal) {
-    /**
-     * Opens a modal
-     * @param  {Object} scope      - an object to be merged with modal's scope
-     * @param  {String} modalClass - (optional) class(es) to be applied to the modal
-     * @return {Object}            - the instance $modal.open() returns
-     */
-    function openModal(scope, modalClass) {
-      var modalScope = $rootScope.$new();
-      scope = scope || {};
-      modalClass = modalClass || 'modal-default';
+    .service('modalService', ['$modal',
+    function ($modal) {
 
-      angular.extend(modalScope, scope);
+        var modalDefaults = {
+            backdrop: true,
+            keyboard: true,
+            modalFade: true,
+            size: '',
+            windowClass: 'modal-default',
+            templateUrl: '/components/modal/modal.html'
+        };
 
-      return $modal.open({
-        templateUrl: 'components/modal/modal.html',
-        windowClass: modalClass,
-        scope: modalScope
-      });
-    }
+        var modalOptions = {
+            closeButtonText: 'Close',
+            actionButtonText: 'OK',
+            headerText: 'Proceed?',
+            bodyText: 'Perform this action?',
+            modalButtonType: 'primary'
+        };
 
-    // Public API here
-    return {
+        this.showModal = function (customModalDefaults, customModalOptions) {
+            if (!customModalDefaults) customModalDefaults = {};
+            customModalDefaults.backdrop = 'static';
+            return this.show(customModalDefaults, customModalOptions);
+        };
 
-      /* Confirmation modals */
-      confirm: {
+        this.show = function (customModalDefaults, customModalOptions) {
+            //Create temp objects to work with since we're in a singleton service
+            var tempModalDefaults = {};
+            var tempModalOptions = {};
 
-        /**
-         * Create a function to open a delete confirmation modal (ex. ng-click='myModalFn(name, arg1, arg2...)')
-         * @param  {Function} del - callback, ran when delete is confirmed
-         * @return {Function}     - the function to open the modal (ex. myModalFn)
-         */
-        delete: function(del) {
-          del = del || angular.noop;
+            //Map angular-ui modal custom defaults to modal defaults defined in service
+            angular.extend(tempModalDefaults, modalDefaults, customModalDefaults);
 
-          /**
-           * Open a delete confirmation modal
-           * @param  {String} name   - name or info to show on modal
-           * @param  {All}           - any additional args are passed staight to del callback
-           */
-          return function() {
-            var args = Array.prototype.slice.call(arguments),
-                name = args.shift(),
-                deleteModal;
+            //Map modal.html $scope custom properties to defaults defined in service
+            angular.extend(tempModalOptions, modalOptions, customModalOptions);
 
-            deleteModal = openModal({
-              modal: {
-                dismissable: true,
-                title: 'Confirm Delete',
-                html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p>',
-                buttons: [{
-                  classes: 'btn-danger',
-                  text: 'Delete',
-                  click: function(e) {
-                    deleteModal.close(e);
-                  }
-                }, {
-                  classes: 'btn-default',
-                  text: 'Cancel',
-                  click: function(e) {
-                    deleteModal.dismiss(e);
-                  }
-                }]
-              }
-            }, 'modal-danger');
+            if (!tempModalDefaults.controller) {
+                tempModalDefaults.controller = function ($scope, $modalInstance) {
+                    $scope.modalOptions = tempModalOptions;
+                    $scope.modalOptions.ok = function (result) {
+                        $modalInstance.close(result);
+                    };
+                    $scope.modalOptions.close = function (result) {
+                        $modalInstance.dismiss('cancel');
+                    };
+                }
+            }
 
-            deleteModal.result.then(function(event) {
-              del.apply(event, args);
-            });
-          };
-        }
-      }
-    };
-  });
+            return $modal.open(tempModalDefaults).result;
+        };
+
+    }]);

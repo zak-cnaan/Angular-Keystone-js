@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngFullApp')
-    .controller('BlogCtrl', function ($scope, $http, $stateParams/*, $location, createFormData*/) {
+    .controller('BlogCtrl', function ($scope, $http, $stateParams, PageTitle/*, $location, createFormData*/) {
         $scope.posts = [];
         $scope.cats = [];
         $scope.item = {};
@@ -16,6 +16,7 @@ angular.module('ngFullApp')
 
 
         $scope.getAll = function () {
+            PageTitle.setTitle("Blog");
             if ($stateParams.cat){
                 $http.get(apiName + $stateParams.cat).success(function (data) {
                     $scope.posts = data;
@@ -34,12 +35,13 @@ angular.module('ngFullApp')
         $scope.findOne = function () {
             $http.get(apiName + "post/" + $stateParams.id).success(function (data) {
                 $scope.item = data;
+                PageTitle.setTitle($scope.item.title);
             });
         };
 
         $scope.countPosts = function (){
             var str;
-            str = $scope.posts.length + " post"
+            str = $scope.posts.length + " post";
 
             if ($scope.posts.length > 1)
                 str += "s";

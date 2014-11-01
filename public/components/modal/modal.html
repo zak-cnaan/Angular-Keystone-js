@@ -1,11 +1,13 @@
 <div class="modal-header">
-  <button ng-if="modal.dismissable" type="button" ng-click="$dismiss()" class="close">&times;</button>
-  <h4 ng-if="modal.title" ng-bind="modal.title" class="modal-title"></h4>
+    <button type="button" data-ng-click="modalOptions.close()" class="close">&times;</button>
+    <h4 class="modal-title">{{modalOptions.headerText}}</h4>
 </div>
 <div class="modal-body">
-  <p ng-if="modal.text" ng-bind="modal.text"></p>
-  <div ng-if="modal.html" ng-bind-html="modal.html"></div>
+    <p>{{modalOptions.bodyText}}</p>
 </div>
 <div class="modal-footer">
-  <button ng-repeat="button in modal.buttons" ng-class="button.classes" ng-click="button.click($event)" ng-bind="button.text" class="btn"></button>
+    <button type="button" class="btn btn-default"
+            data-ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
+    <button class="btn btn-{{modalOptions.modalButtonType}}"
+            data-ng-click="modalOptions.ok();">{{modalOptions.actionButtonText}}</button>
 </div>

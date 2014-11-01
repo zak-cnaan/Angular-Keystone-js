@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('ngFullApp')
-    .controller('ContactCtrl', function ($scope, $http, flash) {
+    .controller('ContactCtrl', function ($scope, $http, flash, PageTitle) {
         $scope.formData = {};
+        PageTitle.setTitle("Contact Us");
 
         var apiName = '/api/contact/';
 

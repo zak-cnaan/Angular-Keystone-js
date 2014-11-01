@@ -48,6 +48,17 @@ angular.module('ngFullApp', [
          */
     })
 
+    .factory('PageTitle', function($rootScope) {
+        var defaultTitle = $rootScope.pageDefaultTitle;
+        var title = defaultTitle;
+        return {
+            setTitle: function(newTitle) {
+                title = defaultTitle + " - " + newTitle;
+                $rootScope.pageTitle = title;
+            }
+        };
+    })
+
     .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
         return {
             // Add authorization token to headers
@@ -79,6 +90,8 @@ angular.module('ngFullApp', [
 
     .run(function ($rootScope, $location, Auth) {
         // Redirect to login if route requires auth and you're not logged in
+        $rootScope.pageDefaultTitle = "My app";
+        $rootScope.pageTitle = "My app";
         $rootScope.$on('$stateChangeStart', function (event, next) {
             Auth.isLoggedInAsync(function (loggedIn) {
 
